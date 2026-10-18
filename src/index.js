@@ -4,6 +4,11 @@ import dotenv from "dotenv"
 import { sequelize, connectDB } from "./config/db.js"
 import "./models/index.js" //Cargar las relaciones
 
+//Importar rutas
+import boardRoutes from "./routes/board.routes.js"
+import listRoutes from "./routes/list.routes.js"
+import cardRoutes from "./routes/card.routes.js"
+
 dotenv.config()
 
 const app = express()
@@ -12,6 +17,11 @@ const PORT = process.env.PORT || 3001
 //Middlewares
 app.use(cors())
 app.use(express.json())
+
+// Definición de Endpoints
+app.use('/api/boards', boardRoutes)
+app.use('/api/lists', listRoutes)
+app.use('/api/cards', cardRoutes)
 
 //Ruta de prueba
 app.get("/api/prueba", (req, res) => {
